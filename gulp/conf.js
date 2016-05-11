@@ -15,6 +15,10 @@ exports.output = {
 };
 
 exports.dependencies = [
+  {
+    // map module names to fallback global var name
+    jquery: '$'
+  },
   // non-relative imports should be treated as external modules
   /^[^.][\w-.]+$/
 ];
