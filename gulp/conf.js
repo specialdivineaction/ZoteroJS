@@ -9,10 +9,9 @@ exports.paths = {
 exports.mainFile = 'index.js';
 
 exports.output = {
-  library: 'library',
-  filename: 'library.js'
+  library: 'zotero',
+  filename: 'zotero.js'
 };
-
 
 exports.dependencies = [
   // non-relative imports should be treated as external modules

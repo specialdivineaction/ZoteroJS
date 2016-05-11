@@ -9,9 +9,6 @@
     "es6": true,
     "mocha": true
   },
-  "globals": {
-    "chai": false
-  },
   "rules": {
     "no-console": 0
   }
