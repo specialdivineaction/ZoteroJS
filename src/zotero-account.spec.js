@@ -61,6 +61,17 @@ describe('ZoteroAccount', function () {
       });
     });
 
+    describe('#getGroup', function () {
+      it('should get a user group by id', function () {
+        const groupId = 498909;
+        let groupP = account.getGroup(groupId);
+        return groupP.then((group) => {
+          group.should.be.an.instanceof(ZoteroGroup);
+          group.id.should.equal(groupId);
+        });
+      });
+    });
+
     describe('#getLibrary', function () {
       it('should return the user library if no group is provided', function () {
         let library = account.getLibrary();
@@ -69,9 +80,8 @@ describe('ZoteroAccount', function () {
       });
 
       it('should return a group library', function () {
-        let groupsP = account.getGroups();
-        return groupsP.then((groups) => {
-          let group = groups[0]
+        let groupP = account.getGroup(498909);
+        return groupP.then((group) => {
           let library = account.getLibrary(group);
           library.should.be.an.instanceof(ZoteroLibrary);
           library.type.should.equal('group');

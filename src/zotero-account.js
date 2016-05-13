@@ -1,5 +1,6 @@
 import { ZoteroLibrary } from './zotero-library';
-import { GetGroupsCommand } from './commands/get-groups'
+import { GetGroupCommand } from './commands/get-group';
+import { GetGroupsCommand } from './commands/get-groups';
 
 class ZoteroAccount {
   /**
@@ -21,11 +22,20 @@ class ZoteroAccount {
   }
 
   /**
-   * @return {Promise.<ZoteroGroup>} All groups to whom this account is a member
+   * @return {Promise.<ZoteroGroup[]>} All groups to whom this account is a member
    */
   getGroups() {
     let command = new GetGroupsCommand(this);
-    return command.execute()
+    return command.execute();
+  }
+
+  /**
+   * Fetch a group by ID
+   * @return {Promise.<ZoteroGroup>}
+   */
+  getGroup(id) {
+    let command = new GetGroupCommand(this, id);
+    return command.execute();
   }
 
   /**

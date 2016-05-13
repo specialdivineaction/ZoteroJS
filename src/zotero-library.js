@@ -1,5 +1,5 @@
 import { GetItemCommand } from './commands/get-item';
-import { GetItemsCommand } from './commands/get-items';
+import { GetLibraryItemsCommand } from './commands/get-library-items';
 import { GetCollectionCommand } from './commands/get-collection';
 import { GetCollectionsCommand } from './commands/get-collections';
 import { GetSubCollectionsCommand } from './commands/get-subcollections';
@@ -47,7 +47,12 @@ class ZoteroLibrary {
    * @return {Promise.<ZoteroItem[]>}
    */
   getItems() {
-    let command = new GetItemsCommand(this);
+    let command = new GetLibraryItemsCommand(this);
+    return command.execute();
+  }
+
+  getAllItems() {
+    let command = new GetLibraryItemsCommand(this, true);
     return command.execute();
   }
 

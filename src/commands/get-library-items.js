@@ -1,11 +1,11 @@
 import { LibraryResourceCommand } from './library-resource-command';
-import { ZoteroCollection } from '../zotero-collection';
+import { ZoteroItem } from '../zotero-item';
 
 /**
- * Retrieves a collection by ID from the given library
+ * Retrieves a specific item by id from the given library.
  * @extends LibraryResourceCommand
  */
-class GetCollectionsCommand extends LibraryResourceCommand {
+class GetLibraryItemsCommand extends LibraryResourceCommand {
   /**
    * @param {ZoteroLibrary} library
    * @param {boolean} recursive
@@ -22,7 +22,7 @@ class GetCollectionsCommand extends LibraryResourceCommand {
    */
   getUrl(baseUrl) {
     let url = super.getUrl(baseUrl);
-    url += '/collections';
+    url += '/items';
     if (!this.recursive) {
       url += '/top';
     }
@@ -40,12 +40,12 @@ class GetCollectionsCommand extends LibraryResourceCommand {
 
   /**
    * @override
-   * @param Promise.<ZoteroCollectionDTO[]> response
-   * @return Promise.<ZoteroCollection[]>
+   * @param {Promise.<ZoteroItemDTO>} response
+   * @return {Promise.<ZoteroItem>}
    */
   handleResponse(response) {
-    return super.handleResponse(response).then((dtos) => dtos.map((dto) => new ZoteroCollection(this.library, dto)));
+    return super.handleResponse(response).then((dtos) => dtos.map((dto) => new ZoteroItem(this.library, dto)));
   }
 }
 
-export { GetCollectionsCommand };
+export { GetLibraryItemsCommand };

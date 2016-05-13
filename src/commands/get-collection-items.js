@@ -5,13 +5,31 @@ import { ZoteroItem } from '../zotero-item';
  * Retrieves a specific item by id from the given library.
  * @extends LibraryResourceCommand
  */
-class GetItemsCommand extends LibraryResourceCommand {
+class GetCollectionItemsCommand extends LibraryResourceCommand {
+  /**
+   * @param {ZoteroCollection} collection
+   * @param {boolean} recursive
+   */
+  constructor(collection, recursive = false) {
+    super(collection.library);
+
+    /** @type {ZoteroCollection} */
+    this.collection = collection;
+
+    /** @type {boolean} */
+    this.recursive = recursive;
+  }
+
   /**
    * @inheritdoc
    */
   getUrl(baseUrl) {
     let url = super.getUrl(baseUrl);
-    return `${url}/items`;
+    url += `/collections/${this.collection.id}/items`;
+    if (!this.recursive) {
+      url += '/top';
+    }
+    return url;
   }
 
   /**
@@ -33,4 +51,4 @@ class GetItemsCommand extends LibraryResourceCommand {
   }
 }
 
-export { GetItemsCommand };
+export { GetCollectionItemsCommand };

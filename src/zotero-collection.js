@@ -1,3 +1,5 @@
+import { GetCollectionItemsCommand } from './commands/get-collection-items';
+
 /**
  * Zotero allows users to organize items into a hierarchy of collections.
  */
@@ -38,12 +40,20 @@ class ZoteroCollection {
   }
 
   /**
+   * @return {Promise.<ZoteroCollection[]>} Resolves to an array of this collection's child collections.
+   */
+  getChildren() {
+    return this.library.getSubCollections(this);
+  }
+
+  /**
    * Retrieves a list of all items belonging to only this collection. This method does not retrieve items recursively in sub-collections.
    * Use {@link ZoteroCollection#getAllItems} to retrieve items recursively instead.
    * @return {Promise.<ZoteroItem[]>} Resolves to a list of all items contained within this collection.
    */
   getItems() {
-    // TODO implement
+    let command = new GetCollectionItemsCommand(this);
+    return command.execute;
   }
 
   /**
@@ -51,7 +61,8 @@ class ZoteroCollection {
    * @return {Promise.<ZoteroItem[]>} Resolves to a list of all items contained within this collection and all sub-collections.
    */
   getAllItems() {
-    // TODO implement
+    let command = new GetCollectionItemsCommand(this, true);
+    return command.execute;
   }
 }
 
