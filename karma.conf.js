@@ -17,6 +17,8 @@ function listFiles() {
 
   var patterns = vendors
     .concat([
+      // add babel polyfill so we have access to Promises in PhantomJS
+      'node_modules/babel-polyfill/dist/polyfill.js',
       path.join(conf.paths.dist, conf.output.filename)
     ]);
 
