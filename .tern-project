@@ -1,6 +1,13 @@
 {
-  "libs": [],
+  "ecmaVersion": 6,
+  "libs": [
+    "browser"
+  ],
   "plugins": {
-    "es_modules": {}
+    "doc_comment": {
+      "fullDocs": true
+    },
+    "es_modules": {},
+    "modules": {}
   }
 }
