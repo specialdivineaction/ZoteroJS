@@ -4,7 +4,8 @@ exports.paths = {
   src: 'src',
   dist: 'dist',
   docs: 'docs',
-  tmp: '.tmp'
+  tmp: '.tmp',
+  test: 'test'
 };
 
 exports.mainFile = 'index.js';

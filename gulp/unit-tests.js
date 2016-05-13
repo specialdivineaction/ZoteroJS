@@ -1,12 +1,7 @@
 var gulp = require('gulp');
 var path = require('path');
-var conf = require('./conf');
 
 var karma = require('karma');
-
-var pathSrcJs = [
-  path.join(conf.paths.dist, conf.output.filename)
-];
 
 /**
  * Launch and delegate test running to Karma server
@@ -15,23 +10,10 @@ var pathSrcJs = [
  * @param  {function} done
  */
 function runTests (isSingle, done) {
-  var reporters = ['progress'];
-  var preprocessors = {};
-
-  if (isSingle) {
-    pathSrcJs.forEach(function (path) {
-      preprocessors[path] = ['coverage'];
-    });
-
-    reporters.push('coverage');
-  }
-
   var localConfig = {
     configFile: path.join(__dirname, '/../karma.conf.js'),
     singleRun: isSingle,
-    autoWatch: !isSingle,
-    reporters: reporters,
-    preprocessors: preprocessors
+    autoWatch: !isSingle
   };
 
   var server = new karma.Server(localConfig, function (failCount) {

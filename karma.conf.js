@@ -19,7 +19,7 @@ function listFiles() {
     .concat([
       // add babel polyfill so we have access to Promises in PhantomJS
       'node_modules/babel-polyfill/dist/polyfill.js',
-      path.join(conf.paths.dist, conf.output.filename)
+      path.join(conf.paths.test, 'index.js')
     ]);
 
   return patterns.map((pattern) => ({ pattern: pattern }));
@@ -44,7 +44,8 @@ module.exports = function (config) {
       'karma-coverage',
       'karma-mocha',
       'karma-chai',
-      'karma-sinon'
+      'karma-sinon',
+      'karma-webpack'
     ],
 
     browsers: [
@@ -52,10 +53,44 @@ module.exports = function (config) {
     ],
 
     reporters: [
-      'progress'
+      'progress',
+      'coverage'
     ],
 
-    proxies: {}
+    proxies: {},
+
+    preprocessors: {
+      [path.join(conf.paths.test, 'index.js')]: 'webpack'
+    },
+
+    webpack: {
+      babel: {
+        presets: ['es2015']
+      },
+      isparta: {
+        babel: {
+          presets: ['es2015']
+        }
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel'
+          },
+          {
+            test: /\.js$/,
+            exclude: [
+              /test\/index\.js$/,
+              /\.(spec|mock)\.js$/
+            ],
+            loader: 'isparta'
+          }
+        ]
+      },
+      externals: conf.dependencies
+    }
   };
 
   config.set(configuration);
