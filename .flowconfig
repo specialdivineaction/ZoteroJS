@@ -1,0 +1,12 @@
+[ignore]
+.*\.(mock|spec)\.js$
+.*node_modules.*
+^jquery$
+
+[include]
+bower_components/
+
+[libs]
+flow_lib/
+
+[options]

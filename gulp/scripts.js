@@ -78,7 +78,12 @@ function webpackWrapper(watch, test, done) {
   }
 }
 
-gulp.task('scripts', function () {
+gulp.task('flow', function () {
+  return gulp.src(path.join(conf.paths.src, '**/*.js'))
+    .pipe($.flowtype());
+});
+
+gulp.task('scripts', ['flow'], function () {
   return webpackWrapper(false, false);
 });
 
