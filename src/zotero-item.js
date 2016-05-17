@@ -1,12 +1,24 @@
+// @flow
+
+/*:: import { ZoteroCollection } from './zotero-collection';*/
+/*:: import { ZoteroLibrary } from './zotero-library';*/
+
 /**
  * Wrapper around an item returned by the Zotero API with helper methods for retrieving related data.
  */
 class ZoteroItem {
+  /*:: library: ZoteroLibrary;*/
+  /*:: id: string;*/
+  /*:: version: number;*/
+  /*:: type: string;*/
+  /*:: parentId: string;*/
+  /*:: collectionIds: string[];*/
+
   /**
    * @param {ZoteroLibrary} library [description]
    * @param {ZoteroItemDTO} dto [description]
    */
-  constructor(library, dto) {
+  constructor(library/*: ZoteroLibrary*/, dto/*: Object*/) {
     /** @type {ZoteroLibrary} */
     this.library = library;
 
@@ -33,28 +45,28 @@ class ZoteroItem {
   /**
    * @return {boolean} True if this item has a parent item.
    */
-  hasParent() {
+  hasParent()/*: boolean*/ {
     return this.parentId ? true : false;
   }
 
   /**
    * @return {Promise.<ZoteroItem>|null} Resolves to parent item or null if this item has no parent.
    */
-  getParent() {
+  getParent()/*: ?Promise<ZoteroItem>*/ {
     return this.parentId ? this.library.getItem(this.parentId) : null;
   }
 
   /**
    * @return {boolean} True if this item belongs to at least one collection.
    */
-  hasCollection() {
+  hasCollection()/*: boolean*/ {
     return this.collectionIds && this.collectionIds.length > 0;
   }
 
   /**
    * @return {Promise.<ZoteroCollection[]>} Resolves to a list of all collections that contain this item.
    */
-  getCollections() {
+  getCollections()/*: Promise<ZoteroCollection[]>*/ {
     if (!this.collectionIds) {
       return Promise.resolve([]);
     }

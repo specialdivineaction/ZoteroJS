@@ -1,18 +1,31 @@
+// @flow
+
 import { GetItemCommand } from './commands/get-item';
 import { GetLibraryItemsCommand } from './commands/get-library-items';
 import { GetCollectionCommand } from './commands/get-collection';
 import { GetCollectionsCommand } from './commands/get-collections';
 import { GetSubCollectionsCommand } from './commands/get-subcollections';
 
+/*:: import { ZoteroAccount } from './zotero-account';*/
+/*:: import { ZoteroCollection } from './zotero-collection';*/
+/*:: import { ZoteroGroup } from './zotero-group';*/
+/*:: import { ZoteroItem } from './zotero-item';*/
+
 /**
  * Zotero items are stored in libraries, of which there are two types: user and group.
  */
 class ZoteroLibrary {
+  /*:: type: string;*/
+  /*:: account: ZoteroAccount;*/
+  /*:: id: string;*/
+  /*:: version: number;*/
+  /*:: name: string;*/
+
   /**
    * @param  {ZoteroAccount} account
    * @param  {ZoteroGroup} group
    */
-  constructor(account, group) {
+  constructor(account/*: ZoteroAccount*/, group/*: ?ZoteroGroup*/) {
     /**
      * Library type: 'user' or 'group'
      * @type {string}
@@ -46,12 +59,16 @@ class ZoteroLibrary {
    * Retrieve all items from the Zotero Library API
    * @return {Promise.<ZoteroItem[]>}
    */
-  getItems() {
+  getItems()/*: Promise<ZoteroItem[]>*/ {
     let command = new GetLibraryItemsCommand(this);
     return command.execute();
   }
 
-  getAllItems() {
+  /**
+   * Retrieve all items recursively beneath this library.
+   * @return {Promise.<ZoteroItem[]>}
+   */
+  getAllItems()/*: Promise<ZoteroItem[]>*/ {
     let command = new GetLibraryItemsCommand(this, true);
     return command.execute();
   }
@@ -61,7 +78,7 @@ class ZoteroLibrary {
    * @param  {string} id
    * @return {Promise.<ZoteroItem>}
    */
-  getItem(id) {
+  getItem(id/*: string*/)/*: Promise<ZoteroItem>*/ {
     let command = new GetItemCommand(this, id);
     return command.execute();
   }
@@ -70,7 +87,7 @@ class ZoteroLibrary {
    * Retrieve all collections
    * @return {Promise.<ZoteroCollection[]>}
    */
-  getCollections() {
+  getCollections()/*: Promise<ZoteroCollection[]>*/ {
     let command = new GetCollectionsCommand(this);
     return command.execute();
   }
@@ -80,7 +97,7 @@ class ZoteroLibrary {
    * @param  {string} id
    * @return {Promise.<ZoteroCollection>}
    */
-  getCollection(id) {
+  getCollection(id/*: string*/)/*: Promise<ZoteroCollection>*/ {
     let command = new GetCollectionCommand(this, id);
     return command.execute();
   }
@@ -90,7 +107,7 @@ class ZoteroLibrary {
    * @param  {string} parentId
    * @return {Promise.<ZoteroCollection[]>}
    */
-  getSubCollections(parentId) {
+  getSubCollections(parentId/*: string*/)/*: Promise<ZoteroCollection[]>*/ {
     let command = new GetSubCollectionsCommand(this, parentId);
     return command.execute();
   }

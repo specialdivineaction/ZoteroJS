@@ -1,11 +1,23 @@
+// @flow
+
 /**
  * A thin wrapper around the {@link ZoteroGroupDTO} object returned by the Zotero API
  */
 class ZoteroGroup {
+  /*:: id: string;*/
+  /*:: version: number;*/
+  /*:: numItems: number;*/
+  /*:: created: Date;*/
+  /*:: modified: Date;*/
+  /*:: name: string;*/
+  /*:: description: string;*/
+  /*:: url: string;*/
+  /*:: ownerId: string;*/
+
   /**
    * @param {ZoteroGroupDTO} dto
    */
-  constructor(dto) {
+  constructor(dto/*: Object*/) {
     /** @type {string} */
     this.id = dto.id;
 

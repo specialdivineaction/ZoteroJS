@@ -1,16 +1,22 @@
+// @flow
+
 import { LibraryResourceCommand } from './library-resource-command';
 import { ZoteroCollection } from '../zotero-collection';
+
+/*:: import { ZoteroLibrary } from '../zotero-library';*/
 
 /**
  * Retrieves a collection by ID from the given library
  * @extends LibraryResourceCommand
  */
 class GetCollectionCommand extends LibraryResourceCommand {
+  /*:: collectionId: string;*/
+
   /**
    * @param {ZoteroLibrary} library
    * @param {string} id Identifier of collection to retrieve.
    */
-  constructor(library, id) {
+  constructor(library/*: ZoteroLibrary*/, id/*: string */) {
     super(library);
 
     /**
@@ -23,7 +29,7 @@ class GetCollectionCommand extends LibraryResourceCommand {
   /**
    * @inheritdoc
    */
-  getUrl(baseUrl) {
+  getUrl(baseUrl/*: string */)/*: string */ {
     let url = super.getUrl(baseUrl);
     return `${url}/collections/${this.collectionId}`;
   }
@@ -31,7 +37,7 @@ class GetCollectionCommand extends LibraryResourceCommand {
   /**
    * @inheritdoc
    */
-  configureRequest(request) {
+  configureRequest(request/*: Object*/)/*: Object*/ {
     request = super.configureRequest(request);
     request.method = 'GET';
     return request;
@@ -42,7 +48,7 @@ class GetCollectionCommand extends LibraryResourceCommand {
    * @param Promise.<ZoteroCollectionDTO> response
    * @return Promise.<ZoteroCollection>
    */
-  handleResponse(response) {
+  handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroCollection>*/ {
     return super.handleResponse(response).then((dto) => new ZoteroCollection(this.library, dto));
   }
 }

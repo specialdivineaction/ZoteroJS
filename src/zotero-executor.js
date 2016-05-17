@@ -1,14 +1,19 @@
+// @flow
 import $ from 'jquery';
+/*:: import { ResourceCommand } from './commands/resource-command';*/
 
 /**
  * A basic wrapper for executing Zotero-based REST API requests.
  * This wrapper allows for shared settings, handling, auth configuration, rate-limiting/backoff, etc.
  */
 class ZoteroExecutor {
+  /*:: baseUrl: string;*/
+  /*:: apiVersion: number;*/
+
   /**
    * @param {string} [baseUrl='https://api.zotero.org'] URL to Zotero API endpoint
    */
-  constructor(baseUrl = 'https://api.zotero.org') {
+  constructor(baseUrl/*: string*/ = 'https://api.zotero.org') {
     /**
      * URL to Zotero API endpoint.
      * @type {string}
@@ -28,7 +33,7 @@ class ZoteroExecutor {
    * @param  {ResourceCommand} resourceCommand
    * @return {Promise.<object>}
    */
-  submit(resourceCommand) {
+  submit(resourceCommand/*: ResourceCommand*/)/*: Promise<any>*/ {
     let request = this.makeRequest(resourceCommand);
 
     // append query string
@@ -49,7 +54,7 @@ class ZoteroExecutor {
    * @param  {ResourceCommand} resourceCommand
    * @return {object}
    */
-  makeRequest(resourceCommand) {
+  makeRequest(resourceCommand/*: ResourceCommand*/)/*: Object*/ {
     let request = {
       url: resourceCommand.getUrl(this.baseUrl),
       // HACK Zotero server doesn't handle HTTP headers properly; send as query params instead
@@ -70,7 +75,7 @@ class ZoteroExecutor {
    * @param  {Promise.<object>}
    * @return {Promise.<object>}
    */
-  interceptResponse(response) {
+  interceptResponse(response/*: Promise<Object>*/)/*: Promise<Object>*/ {
     // TODO rate-limiting / backoff implementation
     return response;
   }

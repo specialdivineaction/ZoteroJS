@@ -1,14 +1,25 @@
+// @flow
+
 import { GetCollectionItemsCommand } from './commands/get-collection-items';
+
+/*:: import { ZoteroLibrary } from './zotero-library';*/
+/*:: import { ZoteroItem } from './zotero-item';*/
 
 /**
  * Zotero allows users to organize items into a hierarchy of collections.
  */
 class ZoteroCollection {
+  /*:: library: ZoteroLibrary;*/
+  /*:: id: string;*/
+  /*:: version: number;*/
+  /*:: name: string;*/
+  /*:: parentId: string;*/
+
   /**
    * @param  {ZoteroLibrary} library
    * @param  {ZoteroCollectionDTO} dto
    */
-  constructor(library, dto) {
+  constructor(library/*: ZoteroLibrary*/, dto/*: Object*/) {
     /** @type {ZoteroLibrary} */
     this.library = library;
 
@@ -28,22 +39,22 @@ class ZoteroCollection {
   /**
    * @return {boolean} True if this collection has a parent collection.
    */
-  hasParent() {
+  hasParent()/*: boolean*/ {
     return this.parentId ? true : false;
   }
 
   /**
    * @return {Promise.<ZoteroCollection>|null} Resolves to the parent collection or null if this collection has no parent.
    */
-  getParent() {
+  getParent()/*: ?Promise<ZoteroCollection>*/ {
     return this.parentId ? this.library.getCollection(this.parentId) : null;
   }
 
   /**
    * @return {Promise.<ZoteroCollection[]>} Resolves to an array of this collection's child collections.
    */
-  getChildren() {
-    return this.library.getSubCollections(this);
+  getChildren()/*: Promise<ZoteroCollection[]>*/ {
+    return this.library.getSubCollections(this.id);
   }
 
   /**
@@ -51,18 +62,18 @@ class ZoteroCollection {
    * Use {@link ZoteroCollection#getAllItems} to retrieve items recursively instead.
    * @return {Promise.<ZoteroItem[]>} Resolves to a list of all items contained within this collection.
    */
-  getItems() {
+  getItems()/*: Promise<ZoteroItem[]>*/ {
     let command = new GetCollectionItemsCommand(this);
-    return command.execute;
+    return command.execute();
   }
 
   /**
    * Retrieves a list of all items belonging to this collection and all items in all sub-collections.
    * @return {Promise.<ZoteroItem[]>} Resolves to a list of all items contained within this collection and all sub-collections.
    */
-  getAllItems() {
+  getAllItems()/*: Promise<ZoteroItem[]>*/ {
     let command = new GetCollectionItemsCommand(this, true);
-    return command.execute;
+    return command.execute();
   }
 }
 

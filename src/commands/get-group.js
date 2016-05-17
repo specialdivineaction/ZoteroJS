@@ -1,16 +1,22 @@
+// @flow
+
 import { ResourceCommand } from './resource-command';
 import { ZoteroGroup } from '../zotero-group';
+
+/*:: import { ZoteroAccount } from '../zotero-account';*/
 
 /**
  * Retrieves all groups of whom this account is a member
  * @extends ResourceCommand
  */
 class GetGroupCommand extends ResourceCommand {
+  /*:: groupId: string;*/
+
   /**
    * @param {ZoteroAccount} account
    * @param {string} groupId
    */
-  constructor(account, groupId) {
+  constructor(account/*: ZoteroAccount*/, groupId/*: string*/) {
     super(account);
 
     /** @type {string} */
@@ -20,7 +26,7 @@ class GetGroupCommand extends ResourceCommand {
   /**
    * @inheritdoc
    */
-  getUrl(baseUrl) {
+  getUrl(baseUrl/*: string*/)/*: string*/ {
     let url = super.getUrl(baseUrl);
     return `${url}/groups/${this.groupId}`;
   }
@@ -28,16 +34,18 @@ class GetGroupCommand extends ResourceCommand {
   /**
    * @inheritdoc
    */
-  configureRequest(request) {
+  configureRequest(request/*: Object*/)/*: Object*/ {
     request = super.configureRequest(request);
     request.method = 'GET';
     return request;
   }
 
   /**
-   * @inheritdoc
+   * @override
+   * @param {Promise.<ZoteroGroupDTO>} response
+   * @return {Promise.<ZoteroGroup>}
    */
-  handleResponse(response) {
+  handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroGroup>*/ {
     return super.handleResponse(response).then((group) => new ZoteroGroup(group));
   }
 }
