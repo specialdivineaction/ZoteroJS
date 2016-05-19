@@ -23,10 +23,10 @@ function runTests (isSingle, done) {
   server.start();
 }
 
-gulp.task('test', ['scripts:test'], function (done) {
+gulp.task('test', function (done) {
   runTests(true, done);
 });
 
-gulp.task('test:auto', ['scripts:test-watch'], function (done) {
+gulp.task('test:auto', function (done) {
   runTests(false, done);
 });

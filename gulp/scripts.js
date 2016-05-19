@@ -10,11 +10,11 @@ var $ = require('gulp-load-plugins')({
  * runs webpack to compile ES6 module files into a single js file
  *
  * @param  {boolean}  watch
- * @param  {boolean}  test
+ * @param  {boolean}  includeTests
  * @param  {Function} done
  * @return {Stream}
  */
-function webpackWrapper(watch, test, done) {
+function webpackWrapper(watch, includeTests, done) {
   var options = {
     watch: watch,
     module: {
@@ -51,7 +51,7 @@ function webpackWrapper(watch, test, done) {
     path.join(conf.paths.src, conf.mainFile)
   ];
 
-  if (test) {
+  if (includeTests) {
     sources.push(path.join(conf.paths.src, '/**/*.spec.js'));
   }
 
@@ -90,11 +90,3 @@ gulp.task('scripts', ['flow'], function () {
 gulp.task('scripts:watch', function (done) {
   return webpackWrapper(true, false, done);
 });
-
-gulp.task('scripts:test', function () {
-  return webpackWrapper(false, true);
-});
-
-gulp.task('scripts:test-watch', function (done) {
-  return webpackWrapper(true, true, done);
-})
