@@ -20,7 +20,7 @@ describe('ZoteroClient', function () {
       let account = client.getAnonymousAccount();
       account.should.be.ok;
       account.should.be.an.instanceof(ZoteroAccount);
-      account.id.should.equal(-1);
+      account.id.should.equal('-1');
       expect(account.authToken).to.not.exist;
     });
   });
