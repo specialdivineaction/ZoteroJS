@@ -1,6 +1,6 @@
 {
-  "name": "library",
-  "main": "dist/library.js",
+  "name": "zotero",
+  "main": "dist/zotero.js",
   "dependencies": {
     "jquery": "^2.0.0"
   },
