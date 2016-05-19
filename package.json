@@ -1,7 +1,11 @@
 {
-  "name": "library",
-  "version": "0.0.0",
+  "name": "zotero",
+  "version": "0.0.1",
   "description": "A library boilerplate using ES6 (babel), eslint, gulp, karma",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.citd.tamu.edu/oss.zotero.js.git"
+  },
   "keywords": [
     "library",
     "es6",
@@ -47,6 +51,6 @@
     "wiredep": "^4.0.0"
   },
   "engines": {
-    "node": "~5.7.0"
+    "node": ">=5.7.0 <7.0.0"
   }
 }
