@@ -1,5 +1,3 @@
-/*eslint ignore: start */
-
 declare module "jquery" {
   declare function $(element: Element | string): any;
 
