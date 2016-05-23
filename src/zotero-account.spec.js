@@ -6,6 +6,8 @@ import { ZoteroGroup } from './zotero-group';
 describe('ZoteroAccount', function () {
   const client = new ZoteroClient();
 
+  this.timeout(4000);
+
   describe('(anonymous)', function () {
     // TODO what can we do with an anonymous account?
     // const account = client.getAnonymousAccount();
@@ -16,8 +18,6 @@ describe('ZoteroAccount', function () {
     const account = client.getUnauthenticatedAccount(accountId);
 
     describe('#getUserLibrary', function () {
-      this.slow(4000);
-
       it ('should produce a library', function () {
         let library = account.getUserLibrary();
         library.should.be.ok;
@@ -41,8 +41,6 @@ describe('ZoteroAccount', function () {
     const account = client.getUserAccount(accountId, authToken);
 
     describe('#getItems', function () {
-      this.slow(4000);
-
       it('should get user library items', function () {
         let library = account.getUserLibrary();
         let itemsP = library.getItems();
@@ -54,8 +52,6 @@ describe('ZoteroAccount', function () {
     });
 
     describe('#getGroups', function () {
-      this.slow(4000);
-
       it('should get user groups', function () {
         let groupsP = account.getGroups();
         return groupsP.then((groups) => {
@@ -68,8 +64,6 @@ describe('ZoteroAccount', function () {
     });
 
     describe('#getGroup', function () {
-      this.slow(4000);
-
       it('should get a user group by id', function () {
         const groupId = 498909;
         let groupP = account.getGroup(groupId);
@@ -81,8 +75,6 @@ describe('ZoteroAccount', function () {
     });
 
     describe('#getLibrary', function () {
-      this.slow(4000);
-
       it('should return the user library if no group is provided', function () {
         let library = account.getLibrary();
         library.should.be.an.instanceof(ZoteroLibrary);
