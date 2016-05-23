@@ -16,6 +16,8 @@ describe('ZoteroAccount', function () {
     const account = client.getUnauthenticatedAccount(accountId);
 
     describe('#getUserLibrary', function () {
+      this.slow(4000);
+
       it ('should produce a library', function () {
         let library = account.getUserLibrary();
         library.should.be.ok;
@@ -24,7 +26,6 @@ describe('ZoteroAccount', function () {
     });
 
     it('should get library collections', function () {
-      this.slow(4000);
       let library = account.getUserLibrary();
       let collectionP = library.getCollection('9KH9TNSJ');
 
@@ -39,17 +40,22 @@ describe('ZoteroAccount', function () {
     const authToken = 'kQjCccDZF3GIJigH3c7i5TXe';
     const account = client.getUserAccount(accountId, authToken);
 
-    it('should get user library items', function () {
+    describe('#getItems', function () {
       this.slow(4000);
-      let library = account.getUserLibrary();
-      let itemsP = library.getItems();
-      return itemsP.then((items) => {
-        items.should.be.an('array');
-        items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+
+      it('should get user library items', function () {
+        let library = account.getUserLibrary();
+        let itemsP = library.getItems();
+        return itemsP.then((items) => {
+          items.should.be.an('array');
+          items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+        });
       });
     });
 
     describe('#getGroups', function () {
+      this.slow(4000);
+
       it('should get user groups', function () {
         let groupsP = account.getGroups();
         return groupsP.then((groups) => {
@@ -62,6 +68,8 @@ describe('ZoteroAccount', function () {
     });
 
     describe('#getGroup', function () {
+      this.slow(4000);
+
       it('should get a user group by id', function () {
         const groupId = 498909;
         let groupP = account.getGroup(groupId);
@@ -73,6 +81,8 @@ describe('ZoteroAccount', function () {
     });
 
     describe('#getLibrary', function () {
+      this.slow(4000);
+
       it('should return the user library if no group is provided', function () {
         let library = account.getLibrary();
         library.should.be.an.instanceof(ZoteroLibrary);
