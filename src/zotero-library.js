@@ -1,10 +1,10 @@
 // @flow
 
-import { GetItemCommand } from './commands/get-item';
-import { GetLibraryItemsCommand } from './commands/get-library-items';
-import { GetCollectionCommand } from './commands/get-collection';
-import { GetCollectionsCommand } from './commands/get-collections';
-import { GetSubCollectionsCommand } from './commands/get-subcollections';
+import { GetItemCommand } from './commands/library/get-item';
+import { GetLibraryItemsCommand } from './commands/library/get-library-items';
+import { GetCollectionCommand } from './commands/library/get-collection';
+import { GetCollectionsCommand } from './commands/library/get-collections';
+import { GetSubCollectionsCommand } from './commands/library/get-subcollections';
 
 /*:: import { ZoteroAccount } from './zotero-account';*/
 /*:: import { ZoteroCollection } from './zotero-collection';*/

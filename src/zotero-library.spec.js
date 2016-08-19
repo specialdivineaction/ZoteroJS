@@ -6,6 +6,9 @@ import ZoteroClient from './index';
 describe('ZoteroLibrary', function () {
   const client = new ZoteroClient();
 
+  // give REST API requests a little more time to resolve
+  this.timeout(5000);
+
   describe('(unauthenticated user)', function () {
     const accountId = '475425';
     const account = client.getUnauthenticatedAccount(accountId);
@@ -23,9 +26,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
@@ -38,9 +38,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getAllItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
@@ -53,9 +50,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollections', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of collections', function () {
           let library = account.getUserLibrary();
           let collectionsP = library.getCollections();
@@ -68,9 +62,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollection', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a collection by id', function () {
           const collectionId = 'N7W92H48';
           let library = account.getUserLibrary();
@@ -100,9 +91,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let itemsP = libraryP.then((library) => library.getItems());
 
@@ -114,9 +102,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getAllItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let itemsP = libraryP.then((library) => library.getItems());
 
@@ -128,9 +113,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollections', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of collections', function () {
           let collectionsP = libraryP.then((library) => library.getCollections());
 
@@ -161,9 +143,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
@@ -176,9 +155,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getAllItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
@@ -191,9 +167,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollections', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of collections', function () {
           let library = account.getUserLibrary();
           let collectionsP = library.getCollections();
@@ -206,9 +179,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollection', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a collection by id', function () {
           const collectionId = 'GE2NDIIU';
           let library = account.getUserLibrary();
@@ -237,9 +207,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let itemsP = libraryP.then((library) => library.getItems());
 
@@ -251,9 +218,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getAllItems', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of items', function () {
           let itemsP = libraryP.then((library) => library.getItems());
 
@@ -265,9 +229,6 @@ describe('ZoteroLibrary', function () {
       });
 
       describe('#getCollections', function () {
-        // give REST API requests a little more time to resolve
-        this.slow(5000);
-
         it('should fetch a list of collections', function () {
           let collectionsP = libraryP.then((library) => library.getCollections());
 

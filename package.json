@@ -1,6 +1,6 @@
 {
   "name": "zotero",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library boilerplate using ES6 (babel), eslint, gulp, karma",
   "repository": {
     "type": "git",

@@ -6,6 +6,8 @@ import { ZoteroGroup } from './zotero-group';
 describe('ZoteroAccount', function () {
   const client = new ZoteroClient();
 
+  this.timeout(4000);
+
   describe('(anonymous)', function () {
     // TODO what can we do with an anonymous account?
     // const account = client.getAnonymousAccount();
@@ -24,7 +26,6 @@ describe('ZoteroAccount', function () {
     });
 
     it('should get library collections', function () {
-      this.slow(4000);
       let library = account.getUserLibrary();
       let collectionP = library.getCollection('9KH9TNSJ');
 
@@ -39,13 +40,14 @@ describe('ZoteroAccount', function () {
     const authToken = 'kQjCccDZF3GIJigH3c7i5TXe';
     const account = client.getUserAccount(accountId, authToken);
 
-    it('should get user library items', function () {
-      this.slow(4000);
-      let library = account.getUserLibrary();
-      let itemsP = library.getItems();
-      return itemsP.then((items) => {
-        items.should.be.an('array');
-        items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+    describe('#getItems', function () {
+      it('should get user library items', function () {
+        let library = account.getUserLibrary();
+        let itemsP = library.getItems();
+        return itemsP.then((items) => {
+          items.should.be.an('array');
+          items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+        });
       });
     });
 

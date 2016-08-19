@@ -1,6 +1,6 @@
 // @flow
 
-import { GetCollectionItemsCommand } from './commands/get-collection-items';
+import { GetCollectionItemsCommand } from './commands/library/get-collection-items';
 
 /*:: import { ZoteroLibrary } from './zotero-library';*/
 /*:: import { ZoteroItem } from './zotero-item';*/

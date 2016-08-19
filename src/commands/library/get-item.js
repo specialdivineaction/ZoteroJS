@@ -1,9 +1,9 @@
 // @flow
 
 import { LibraryResourceCommand } from './library-resource-command';
-import { ZoteroItem } from '../zotero-item';
+import { ZoteroItem } from '../../zotero-item';
 
-/*:: import { ZoteroLibrary } from '../zotero-library';*/
+/*:: import { ZoteroLibrary } from '../../zotero-library';*/
 
 /**
  * Retrieves a specific item by id from the given library.

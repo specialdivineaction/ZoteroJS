@@ -20,6 +20,7 @@ describe('ZoteroItem', function () {
     let client = new ZoteroClient();
     let account = client.getUserAccount('2536190', 'kQjCccDZF3GIJigH3c7i5TXe');
     let library = account.getUserLibrary();
+    this.timeout(4000);
 
     it('should retrieve an array of collections', function () {
       let itemP = library.getItem('DZ7P8B6R');
