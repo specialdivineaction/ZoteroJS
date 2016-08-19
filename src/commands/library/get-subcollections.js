@@ -1,9 +1,9 @@
 // @flow
 
 import { LibraryResourceCommand } from './library-resource-command';
-import { ZoteroCollection } from '../zotero-collection';
+import { ZoteroCollection } from '../../zotero-collection';
 
-/*:: import { ZoteroLibrary } from '../zotero-library';*/
+/*:: import { ZoteroLibrary } from '../../zotero-library';*/
 
 /**
  * Retrieves all sub-collections belonging to the collection identified by the given ID.

@@ -1,8 +1,8 @@
 // @flow
 
-import { ResourceCommand } from './resource-command';
+import { ResourceCommand } from '../resource-command';
 
-/*:: import { ZoteroLibrary } from '../zotero-library';*/
+/*:: import { ZoteroLibrary } from '../../zotero-library';*/
 
 /**
  * Base class for querying resources from within a library
