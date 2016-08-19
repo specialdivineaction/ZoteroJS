@@ -1,6 +1,6 @@
 import { ZoteroItem } from './zotero-item';
 import { ZoteroCollection } from './zotero-collection';
-import ZoteroClient  from './index';
+import { ZoteroClient }  from './zotero-client';
 import * as mock from './zotero-item.mock';
 import { expect } from 'chai';
 

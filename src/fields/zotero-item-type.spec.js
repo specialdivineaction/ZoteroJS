@@ -1,4 +1,4 @@
-import ZoteroClient from '../index';
+import { ZoteroClient } from '../zotero-client';
 import { ZoteroCreatorRole } from './zotero-creator-role';
 import { ZoteroItemType } from './zotero-item-type';
 import { ZoteroItemField } from './zotero-item-field';

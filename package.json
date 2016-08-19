@@ -1,18 +1,13 @@
 {
   "name": "zotero",
-  "version": "0.0.2",
-  "description": "A library boilerplate using ES6 (babel), eslint, gulp, karma",
+  "version": "0.0.3",
+  "description": "Zotero SDK for JavaScript",
   "repository": {
     "type": "git",
     "url": "ssh://git@git.citd.tamu.edu/oss.zotero.js.git"
   },
   "keywords": [
-    "library",
-    "es6",
-    "es2015",
-    "babel",
-    "gulp",
-    "karma"
+    "zotero"
   ],
   "license": "Apache-2.0",
   "dependencies": {},
