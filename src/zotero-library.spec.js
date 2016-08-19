@@ -1,7 +1,7 @@
 import { ZoteroItem } from './zotero-item';
 import { ZoteroCollection } from './zotero-collection';
 import { ZoteroLibrary } from './zotero-library';
-import ZoteroClient from './index';
+import { ZoteroClient } from './zotero-client';
 
 describe('ZoteroLibrary', function () {
   const client = new ZoteroClient();
