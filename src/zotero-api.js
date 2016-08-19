@@ -70,3 +70,24 @@
  * @property {string} data.url
  * @property {integer} data.owner
  */
+
+/**
+ * @typedef ZoteroItemTypeDTO
+ * @type {object}
+ * @property {string} itemType
+ * @property {string} localized
+ */
+
+/**
+ * @typedef ZoteroItemFieldDTO
+ * @type {object}
+ * @property {string} field
+ * @property {string} localized
+ */
+
+/**
+ * @typedef ZoteroCreatorTypeDTO
+ * @type {object}
+ * @property {string} creatorType
+ * @property {string} localized
+ */
