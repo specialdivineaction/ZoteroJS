@@ -13,6 +13,7 @@ class ZoteroItem {
   /*:: type: string;*/
   /*:: parentId: string;*/
   /*:: collectionIds: string[];*/
+  /*:: properties: { [key: string]: any };*/
 
   /**
    * @param {ZoteroLibrary} library [description]
@@ -40,6 +41,11 @@ class ZoteroItem {
      */
     this.collectionIds = dto.data.collections;
 
+    /**
+     * Arbitrary key/value item data pairs
+     * @type {object}
+     */
+    this.properties = dto.data;
   }
 
   /**
