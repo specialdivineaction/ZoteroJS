@@ -5,6 +5,7 @@ import { GetLibraryItemsCommand } from './commands/library/get-library-items';
 import { GetCollectionCommand } from './commands/library/get-collection';
 import { GetCollectionsCommand } from './commands/library/get-collections';
 import { GetSubCollectionsCommand } from './commands/library/get-subcollections';
+import { LibraryItemSearchCommand } from './commands/library/search';
 
 /*:: import { ZoteroAccount } from './zotero-account';*/
 /*:: import { ZoteroCollection } from './zotero-collection';*/
@@ -53,6 +54,16 @@ class ZoteroLibrary {
      * @type {string}
      */
     this.name = group ? group.name : `User library for ${this.id}`;
+  }
+
+  searchItems(query/*: string*/)/*: Promise<ZoteroItem[]>*/ {
+    let command = new LibraryItemSearchCommand(this, query);
+    return command.execute();
+  }
+
+  searchAllItems(query/*: string*/)/*: Promise<ZoteroItem[]>*/ {
+    let command = new LibraryItemSearchCommand(this, query, true);
+    return command.execute();
   }
 
   /**
