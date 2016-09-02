@@ -62,7 +62,7 @@ class ZoteroAccount {
     if (this.authToken) {
       // HACK Zotero server doesn't handle HTTP headers properly; send as query params instead
       // request.headers['Authorization'] = `Bearer ${this.authToken}`;
-      request.query['key'] = this.authToken;
+      request.query.key = this.authToken;
     }
 
     return request;
