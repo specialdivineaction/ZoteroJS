@@ -41,6 +41,7 @@ class GetLibraryItemsCommand extends LibraryResourceCommand {
   configureRequest(request/*: Object*/)/*: Object*/ {
     request = super.configureRequest(request);
     request.method = 'GET';
+    request.query.include = 'citation'
     return request;
   }
 
