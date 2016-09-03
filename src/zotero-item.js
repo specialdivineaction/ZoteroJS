@@ -10,6 +10,7 @@ class ZoteroItem {
   /*:: library: ZoteroLibrary;*/
   /*:: id: string;*/
   /*:: version: number;*/
+  /*:: label: string;*/
   /*:: type: string;*/
   /*:: parentId: string;*/
   /*:: collectionIds: string[];*/
@@ -30,22 +31,27 @@ class ZoteroItem {
     this.version = dto.version;
 
     /** @type {string} */
-    this.type = dto.data.itemType;
+    this.label = dto.citation;
 
-    /** @type {string} */
-    this.parentId = dto.data.parentItem;
+    if (dto.data) {
+      /** @type {string} */
+      this.type = dto.data.itemType;
 
-    /**
-     * A list of collection ids to which this item belongs.
-     * @type {string[]}
-     */
-    this.collectionIds = dto.data.collections;
+      /** @type {string} */
+      this.parentId = dto.data.parentItem;
 
-    /**
-     * Arbitrary key/value item data pairs
-     * @type {object}
-     */
-    this.properties = dto.data;
+      /**
+       * A list of collection ids to which this item belongs.
+       * @type {string[]}
+       */
+      this.collectionIds = dto.data.collections;
+
+      /**
+       * Arbitrary key/value item data pairs
+       * @type {object}
+       */
+      this.properties = dto.data;
+    }
   }
 
   /**

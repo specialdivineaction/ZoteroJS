@@ -9,15 +9,19 @@ import { ZoteroItem } from '../../zotero-item';
  * Retrieves a specific item by id from the given library.
  * @extends LibraryResourceCommand
  */
-class GetLibraryItemsCommand extends LibraryResourceCommand {
+class LibraryItemSearchCommand extends LibraryResourceCommand {
+  /*:: query: string;*/
   /*:: recursive: boolean;*/
 
   /**
    * @param {ZoteroLibrary} library
    * @param {boolean} recursive
    */
-  constructor(library/*: ZoteroLibrary*/, recursive/*: boolean*/ = false) {
+  constructor(library/*: ZoteroLibrary*/, query/*: string*/, recursive/*: boolean*/ = false) {
     super(library);
+
+    /** @type {string} */
+    this.query = query;
 
     /** @type {boolean} */
     this.recursive = recursive;
@@ -41,6 +45,7 @@ class GetLibraryItemsCommand extends LibraryResourceCommand {
   configureRequest(request/*: Object*/)/*: Object*/ {
     request = super.configureRequest(request);
     request.method = 'GET';
+    request.query.q = this.query;
     request.query.include = 'citation'
     return request;
   }
@@ -55,4 +60,4 @@ class GetLibraryItemsCommand extends LibraryResourceCommand {
   }
 }
 
-export { GetLibraryItemsCommand };
+export { LibraryItemSearchCommand };

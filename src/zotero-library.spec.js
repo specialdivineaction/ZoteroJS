@@ -7,7 +7,7 @@ describe('ZoteroLibrary', function () {
   const client = new ZoteroClient();
 
   // give REST API requests a little more time to resolve
-  this.timeout(5000);
+  this.timeout(10000);
 
   describe('(unauthenticated user)', function () {
     const accountId = '475425';
