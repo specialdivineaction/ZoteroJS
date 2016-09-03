@@ -6,7 +6,7 @@ import { ZoteroGroup } from './zotero-group';
 describe('ZoteroAccount', function () {
   const client = new ZoteroClient();
 
-  this.timeout(4000);
+  this.timeout(10000);
 
   describe('(anonymous)', function () {
     // TODO what can we do with an anonymous account?
