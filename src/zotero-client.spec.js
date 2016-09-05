@@ -94,7 +94,7 @@ describe('ZoteroClient', function () {
   });
 
   describe('#getCreatorFields', function () {
-    this.timeout(4000);
+    this.timeout(10000);
 
     it('should get a listing of all creator fields', function () {
       let fieldsP = client.getCreatorFields();
