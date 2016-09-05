@@ -95,16 +95,19 @@ class ZoteroItem {
   toString()/*: string*/ {
     let parts/*: string[]*/ = [];
 
-    if (this.meta && this.meta.creatorSummary) {
-      parts.push(this.meta.creatorSummary);
+    let creatorSummary = this.meta && this.meta.creatorSummary && this.meta.creatorSummary.trim()
+    if (creatorSummary) {
+      parts.push(creatorSummary);
     }
 
-    if (this.meta && this.meta.parsedDate) {
-      parts.push(`(${this.meta.parsedDate})`);
+    let parsedDate = this.meta && this.meta.parsedDate && this.meta.parsedDate.trim();
+    if (parsedDate) {
+      parts.push(`(${parsedDate})`);
     }
 
-    if (this.properties && this.properties.title) {
-      parts.push(`<em>${this.properties.title}</em>`);
+    let title = this.properties && this.properties.title;
+    if (title) {
+      parts.push(`<em>${title}</em>`);
     }
 
     if (parts.length === 0) {
