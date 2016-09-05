@@ -10,10 +10,10 @@ class ZoteroItem {
   /*:: library: ZoteroLibrary;*/
   /*:: id: string;*/
   /*:: version: number;*/
-  /*:: label: string;*/
   /*:: type: string;*/
   /*:: parentId: string;*/
   /*:: collectionIds: string[];*/
+  /*:: meta: { [key: string]: any };*/
   /*:: properties: { [key: string]: any };*/
 
   /**
@@ -30,8 +30,8 @@ class ZoteroItem {
     /** @type {integer} */
     this.version = dto.version;
 
-    /** @type {string} */
-    this.label = dto.citation;
+    /** @type {object} */
+    this.meta = dto.meta;
 
     if (dto.data) {
       /** @type {string} */
@@ -86,6 +86,32 @@ class ZoteroItem {
     let promises = this.collectionIds.map((id) => this.library.getCollection(id));
 
     return Promise.all(promises);
+  }
+
+  /**
+   * @override
+   * @return {string}
+   */
+  toString()/*: string*/ {
+    let parts/*: string[]*/ = [];
+
+    if (this.meta && this.meta.creatorSummary) {
+      parts.push(this.meta.creatorSummary);
+    }
+
+    if (this.meta && this.meta.parsedDate) {
+      parts.push(`(${this.meta.parsedDate})`);
+    }
+
+    if (this.properties && this.properties.title) {
+      parts.push(`<em>${this.properties.title}</em>`);
+    }
+
+    if (parts.length === 0) {
+      parts.push('[unknown title]');
+    }
+
+    return parts.join(' ');
   }
 }
 

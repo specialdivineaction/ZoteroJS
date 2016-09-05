@@ -46,7 +46,6 @@ class LibraryItemSearchCommand extends LibraryResourceCommand {
     request = super.configureRequest(request);
     request.method = 'GET';
     request.query.q = this.query;
-    request.query.include = 'citation'
     return request;
   }
 
