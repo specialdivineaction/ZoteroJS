@@ -190,6 +190,37 @@ describe('ZoteroLibrary', function () {
           });
         });
       });
+
+      describe('#saveItem', function () {
+        it('should save a new item', function () {
+          let library = account.getUserLibrary();
+          let itemP = createItem(library);
+
+          return itemP.then(item => {
+            item.should.be.an.instanceof(ZoteroItem);
+          });
+        });
+
+        it('should save an existing item', function () {
+          let library = account.getUserLibrary();
+          const itemId = 'C8IS67S2';
+
+          let itemP = library.getItem(itemId).then(item => item.properties);
+
+          let updatedItemP = itemP.then(item => {
+            item.title += '.';
+            return item;
+          });
+
+          let savedItemP = updatedItemP.then(item => library.saveItem(item));
+
+          return Promise.all([updatedItemP, savedItemP])
+            .then(([updatedItem, savedItem]) => {
+              savedItem.should.be.ok;
+              savedItem.properties.title.should.equal(updatedItem.title);
+            });
+        });
+      });
     });
 
     describe('group library', function () {
@@ -241,3 +272,24 @@ describe('ZoteroLibrary', function () {
     });
   });
 });
+
+function createItem(library) {
+  return library.saveItem({
+    itemType: "book",
+    title: "My Book",
+    creators: [
+      {
+        creatorType: "author",
+        firstName: "Sam",
+        lastName: "McAuthor"
+      },
+      {
+        creatorType: "editor",
+        name: "John T. Singlefield"
+      }
+    ],
+    tags: [],
+    collections: [],
+    relations: {}
+  });
+}

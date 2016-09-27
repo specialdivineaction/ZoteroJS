@@ -6,6 +6,8 @@ import { GetCollectionCommand } from './commands/library/get-collection';
 import { GetCollectionsCommand } from './commands/library/get-collections';
 import { GetSubCollectionsCommand } from './commands/library/get-subcollections';
 import { LibraryItemSearchCommand } from './commands/library/search';
+import { CreateLibraryItemCommand } from './commands/library/create-item';
+import { UpdateLibraryItemCommand } from './commands/library/update-item';
 
 /*:: import { ZoteroAccount } from './zotero-account';*/
 /*:: import { ZoteroCollection } from './zotero-collection';*/
@@ -123,6 +125,21 @@ class ZoteroLibrary {
     return command.execute();
   }
 
+  /**
+   * Saves an item to the Zotero API. If the provided item does not already exist (i.e. have a key),
+   * then a new item will be created and a new key assigned.
+   * @param {object} item
+   * @return {Promise.<ZoteroItem>} - resolves to the created or updated item on success
+   */
+  saveItem(item/*: Object*/)/*: Promise<ZoteroItem>*/ {
+    if (item.key) {
+      let command = new UpdateLibraryItemCommand(this, item);
+      return command.execute().then(key => this.getItem(key));
+    } else {
+      let command = new CreateLibraryItemCommand(this, item);
+      return command.execute();
+    }
+  }
 }
 
 export { ZoteroLibrary };
