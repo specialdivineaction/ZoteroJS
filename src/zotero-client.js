@@ -16,10 +16,11 @@ class ZoteroClient {
 
   /**
    * @param {string} [baseUrl] URL of Zotero API endpoint.
+   * @param {function} [serializer] JSON object serializer
    */
-  constructor(baseUrl/*: string*/) {
+  constructor(baseUrl/*: string*/, serializer/*: (o: Object) => string*/) {
     /** @type {ZoteroExecutor} */
-    this.executor = new ZoteroExecutor(baseUrl);
+    this.executor = new ZoteroExecutor(baseUrl, serializer);
   }
 
   /**
