@@ -2,6 +2,8 @@
 import $ from 'jquery';
 /*:: import { ResourceCommand } from './commands/resource-command';*/
 
+const ZOTERO_BASE_URL/*: string*/ = 'https://api.zotero.org';
+
 /**
  * A basic wrapper for executing Zotero-based REST API requests.
  * This wrapper allows for shared settings, handling, auth configuration, rate-limiting/backoff, etc.
@@ -15,7 +17,7 @@ class ZoteroExecutor {
    * @param {string} [baseUrl='https://api.zotero.org'] URL to Zotero API endpoint
    * @param {function} [serializer=JSON.stringify] JSON object serializer
    */
-  constructor(baseUrl/*: string*/ = 'https://api.zotero.org', serializer/*: (o: Object) => string*/ = JSON.stringify) {
+  constructor(baseUrl/*: string*/ = ZOTERO_BASE_URL, serializer/*: (o: Object) => string*/ = JSON.stringify) {
     /**
      * URL to Zotero API endpoint.
      * @type {string}
@@ -34,6 +36,14 @@ class ZoteroExecutor {
      * @default
      */
     this.apiVersion = 3;
+  }
+
+  /**
+   * Gets the built-in Zotero API base url
+   * @return {string}
+   */
+  static getDefaultBaseUrl()/*: string*/ {
+    return ZOTERO_BASE_URL;
   }
 
   /**
