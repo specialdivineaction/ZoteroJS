@@ -221,6 +221,14 @@ describe('ZoteroLibrary', function () {
             });
         });
       });
+
+      describe('#deleteItem', function () {
+        it('should delete an existing item', function () {
+          let library = account.getUserLibrary();
+          let itemP = createItem(library);
+          return itemP.then(item => library.deleteItem(item.id, item.version));
+        });
+      });
     });
 
     describe('group library', function () {

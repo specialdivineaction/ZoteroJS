@@ -8,6 +8,7 @@ import { GetSubCollectionsCommand } from './commands/library/get-subcollections'
 import { LibraryItemSearchCommand } from './commands/library/search';
 import { CreateLibraryItemCommand } from './commands/library/create-item';
 import { UpdateLibraryItemCommand } from './commands/library/update-item';
+import { DeleteLibraryItemCommand } from './commands/library/delete-item';
 
 /*:: import { ZoteroAccount } from './zotero-account';*/
 /*:: import { ZoteroCollection } from './zotero-collection';*/
@@ -149,6 +150,17 @@ class ZoteroLibrary {
       let command = new CreateLibraryItemCommand(this, item);
       return command.execute();
     }
+  }
+
+  /**
+   * Removes an item from the Zotero API.
+   * @param {string} key
+   * @param {integer} version
+   * @return {Promise}
+   */
+  deleteItem(key/*: string*/, version/*: number*/)/*: Promise<*> */ {
+    let command = new DeleteLibraryItemCommand(this, key, version);
+    return command.execute().then(() => null);
   }
 }
 

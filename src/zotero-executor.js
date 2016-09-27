@@ -68,6 +68,7 @@ class ZoteroExecutor {
       // headers: {
       //   'Zotero-API-Version': this.apiVersion
       // },
+      headers: {},
       query: {
         v: 3
       }
