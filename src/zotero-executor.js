@@ -9,16 +9,24 @@ import $ from 'jquery';
 class ZoteroExecutor {
   /*:: baseUrl: string;*/
   /*:: apiVersion: number;*/
+  /*:: serializer: (o: Object) => string;*/
 
   /**
    * @param {string} [baseUrl='https://api.zotero.org'] URL to Zotero API endpoint
+   * @param {function} [serializer=JSON.stringify] JSON object serializer
    */
-  constructor(baseUrl/*: string*/ = 'https://api.zotero.org') {
+  constructor(baseUrl/*: string*/ = 'https://api.zotero.org', serializer/*: (o: Object) => string*/ = JSON.stringify) {
     /**
      * URL to Zotero API endpoint.
      * @type {string}
      */
     this.baseUrl = baseUrl;
+
+    /**
+     * JSON object serializer for preprocessing POST data
+     * @type {function}
+     */
+    this.serializer = serializer;
 
     /**
      * Zotero API version
@@ -47,7 +55,7 @@ class ZoteroExecutor {
     // set content type of body
     if (request.data && typeof request.data === 'object') {
       request.contentType = 'application/json; charset=UTF-8';
-      request.data = JSON.stringify(request.data);
+      request.data = this.serializer(request.data);
     }
 
     let response = $.ajax(request);
