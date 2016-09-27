@@ -43,6 +43,13 @@ class ZoteroExecutor {
         request.url += '?' + qs;
       }
     }
+
+    // set content type of body
+    if (request.data && typeof request.data === 'object') {
+      request.contentType = 'application/json; charset=UTF-8';
+      request.data = JSON.stringify(request.data);
+    }
+
     let response = $.ajax(request);
     let filteredResponse = this.interceptResponse(response);
     return resourceCommand.handleResponse(filteredResponse);
@@ -61,6 +68,7 @@ class ZoteroExecutor {
       // headers: {
       //   'Zotero-API-Version': this.apiVersion
       // },
+      headers: {},
       query: {
         v: 3
       }

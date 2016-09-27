@@ -50,7 +50,7 @@ class GetCollectionsCommand extends LibraryResourceCommand {
    * @return Promise.<ZoteroCollection[]>
    */
   handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroCollection[]>*/ {
-    return super.handleResponse(response).then((dtos) => dtos.map((dto) => new ZoteroCollection(this.library, dto)));
+    return super.handleResponse(response).then(dtos => dtos.map(dto => new ZoteroCollection(this.library, dto)));
   }
 }
 

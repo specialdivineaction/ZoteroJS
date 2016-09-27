@@ -55,7 +55,7 @@ class LibraryItemSearchCommand extends LibraryResourceCommand {
    * @return {Promise.<ZoteroItem[]>}
    */
   handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroItem[]>*/ {
-    return super.handleResponse(response).then((dtos) => dtos.map((dto) => new ZoteroItem(this.library, dto)));
+    return super.handleResponse(response).then(dtos => dtos.map(dto => new ZoteroItem(this.library, dto)));
   }
 }
 

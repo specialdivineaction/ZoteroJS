@@ -29,7 +29,7 @@ describe('ZoteroAccount', function () {
       let library = account.getUserLibrary();
       let collectionP = library.getCollection('9KH9TNSJ');
 
-      return collectionP.then((collection) => {
+      return collectionP.then(collection => {
         collection.id.should.equal('9KH9TNSJ');
       });
     });
@@ -44,9 +44,9 @@ describe('ZoteroAccount', function () {
       it('should get user library items', function () {
         let library = account.getUserLibrary();
         let itemsP = library.getItems();
-        return itemsP.then((items) => {
+        return itemsP.then(items => {
           items.should.be.an('array');
-          items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+          items.every(item => item.should.be.an.instanceof(ZoteroItem));
         });
       });
     });
@@ -54,11 +54,11 @@ describe('ZoteroAccount', function () {
     describe('#getGroups', function () {
       it('should get user groups', function () {
         let groupsP = account.getGroups();
-        return groupsP.then((groups) => {
+        return groupsP.then(groups => {
           groups.should.be.an('array');
           // future tests depend on these groups
           groups.should.not.be.empty;
-          groups.every((group) => group.should.be.an.instanceof(ZoteroGroup));
+          groups.every(group => group.should.be.an.instanceof(ZoteroGroup));
         });
       });
     });
@@ -67,7 +67,7 @@ describe('ZoteroAccount', function () {
       it('should get a user group by id', function () {
         const groupId = 498909;
         let groupP = account.getGroup(groupId);
-        return groupP.then((group) => {
+        return groupP.then(group => {
           group.should.be.an.instanceof(ZoteroGroup);
           group.id.should.equal(groupId);
         });
@@ -83,7 +83,7 @@ describe('ZoteroAccount', function () {
 
       it('should return a group library', function () {
         let groupP = account.getGroup(498909);
-        return groupP.then((group) => {
+        return groupP.then(group => {
           let library = account.getLibrary(group);
           library.should.be.an.instanceof(ZoteroLibrary);
           library.type.should.equal('group');

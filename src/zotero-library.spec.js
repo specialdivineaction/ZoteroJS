@@ -30,9 +30,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
@@ -42,9 +42,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
@@ -54,9 +54,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let collectionsP = library.getCollections();
 
-          return collectionsP.then((collections) => {
+          return collectionsP.then(collections => {
             collections.should.be.an('array');
-            collections.every((collection) => collection.should.be.an.instanceof(ZoteroCollection));
+            collections.every(collection => collection.should.be.an.instanceof(ZoteroCollection));
           });
         });
       });
@@ -67,7 +67,7 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let collectionP = library.getCollection(collectionId);
 
-          return collectionP.then((collection) => {
+          return collectionP.then(collection => {
             collection.should.be.an.instanceof(ZoteroCollection);
             collection.id.should.equal(collectionId);
           });
@@ -78,10 +78,10 @@ describe('ZoteroLibrary', function () {
     // TODO currently don't know of any groups that are accessible via an unauthenticated account
     describe('group library', function () {
       let groupP = account.getGroup('85759');
-      let libraryP = groupP.then((group) => new ZoteroLibrary(account, group));
+      let libraryP = groupP.then(group => new ZoteroLibrary(account, group));
 
       it('should populate fields correctly', function () {
-        return Promise.all([groupP, libraryP]).then((args) => {
+        return Promise.all([groupP, libraryP]).then(args => {
           let [group, library] = args;
           library.type.should.equal('group');
           library.account.should.deep.equal(account);
@@ -92,33 +92,33 @@ describe('ZoteroLibrary', function () {
 
       describe('#getItems', function () {
         it('should fetch a list of items', function () {
-          let itemsP = libraryP.then((library) => library.getItems());
+          let itemsP = libraryP.then(library => library.getItems());
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
 
       describe('#getAllItems', function () {
         it('should fetch a list of items', function () {
-          let itemsP = libraryP.then((library) => library.getItems());
+          let itemsP = libraryP.then(library => library.getItems());
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
 
       describe('#getCollections', function () {
         it('should fetch a list of collections', function () {
-          let collectionsP = libraryP.then((library) => library.getCollections());
+          let collectionsP = libraryP.then(library => library.getCollections());
 
-          return collectionsP.then((collections) => {
+          return collectionsP.then(collections => {
             collections.should.be.an('array');
-            collections.every((collection) => collection.should.be.an.instanceof(ZoteroCollection));
+            collections.every(collection => collection.should.be.an.instanceof(ZoteroCollection));
           });
         });
       });
@@ -147,9 +147,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
@@ -159,9 +159,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let itemsP = library.getItems();
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
@@ -171,9 +171,9 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let collectionsP = library.getCollections();
 
-          return collectionsP.then((collections) => {
+          return collectionsP.then(collections => {
             collections.should.be.an('array');
-            collections.every((collection) => collection.should.be.an.instanceof(ZoteroCollection));
+            collections.every(collection => collection.should.be.an.instanceof(ZoteroCollection));
           });
         });
       });
@@ -184,20 +184,59 @@ describe('ZoteroLibrary', function () {
           let library = account.getUserLibrary();
           let collectionP = library.getCollection(collectionId);
 
-          return collectionP.then((collection) => {
+          return collectionP.then(collection => {
             collection.should.be.an.instanceof(ZoteroCollection);
             collection.id.should.equal(collectionId);
           });
         });
       });
+
+      describe('#saveItem', function () {
+        it('should save a new item', function () {
+          let library = account.getUserLibrary();
+          let itemP = createItem(library);
+
+          return itemP.then(item => {
+            item.should.be.an.instanceof(ZoteroItem);
+          });
+        });
+
+        it('should save an existing item', function () {
+          let library = account.getUserLibrary();
+          const itemId = 'C8IS67S2';
+
+          let itemP = library.getItem(itemId).then(item => item.properties);
+
+          let updatedItemP = itemP.then(item => {
+            item.title += '.';
+            return item;
+          });
+
+          let savedItemP = updatedItemP.then(item => library.saveItem(item));
+
+          return Promise.all([updatedItemP, savedItemP])
+            .then(([updatedItem, savedItem]) => {
+              savedItem.should.be.ok;
+              savedItem.properties.title.should.equal(updatedItem.title);
+            });
+        });
+      });
+
+      describe('#deleteItem', function () {
+        it('should delete an existing item', function () {
+          let library = account.getUserLibrary();
+          let itemP = createItem(library);
+          return itemP.then(item => library.deleteItem(item.id, item.version));
+        });
+      });
     });
 
     describe('group library', function () {
-      let groupP = account.getGroups().then((groups) => groups[0]);
-      let libraryP = groupP.then((group) => new ZoteroLibrary(account, group));
+      let groupP = account.getGroups().then(groups => groups[0]);
+      let libraryP = groupP.then(group => new ZoteroLibrary(account, group));
 
       it('should populate fields correctly', function () {
-        return Promise.all([groupP, libraryP]).then((args) => {
+        return Promise.all([groupP, libraryP]).then(args => {
           let [group, library] = args;
           library.type.should.equal('group');
           library.account.should.deep.equal(account);
@@ -208,36 +247,57 @@ describe('ZoteroLibrary', function () {
 
       describe('#getItems', function () {
         it('should fetch a list of items', function () {
-          let itemsP = libraryP.then((library) => library.getItems());
+          let itemsP = libraryP.then(library => library.getItems());
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
 
       describe('#getAllItems', function () {
         it('should fetch a list of items', function () {
-          let itemsP = libraryP.then((library) => library.getItems());
+          let itemsP = libraryP.then(library => library.getItems());
 
-          return itemsP.then((items) => {
+          return itemsP.then(items => {
             items.should.be.an('array');
-            items.every((item) => item.should.be.an.instanceof(ZoteroItem));
+            items.every(item => item.should.be.an.instanceof(ZoteroItem));
           });
         });
       });
 
       describe('#getCollections', function () {
         it('should fetch a list of collections', function () {
-          let collectionsP = libraryP.then((library) => library.getCollections());
+          let collectionsP = libraryP.then(library => library.getCollections());
 
-          return collectionsP.then((collections) => {
+          return collectionsP.then(collections => {
             collections.should.be.an('array');
-            collections.every((collection) => collection.should.be.an.instanceof(ZoteroCollection));
+            collections.every(collection => collection.should.be.an.instanceof(ZoteroCollection));
           });
         });
       });
     });
   });
 });
+
+function createItem(library) {
+  return library.saveItem({
+    itemType: "book",
+    title: "My Book",
+    creators: [
+      {
+        creatorType: "author",
+        firstName: "Sam",
+        lastName: "McAuthor"
+      },
+      {
+        creatorType: "editor",
+        name: "John T. Singlefield"
+      }
+    ],
+    tags: [],
+    collections: [],
+    relations: {}
+  });
+}

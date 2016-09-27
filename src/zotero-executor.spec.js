@@ -44,7 +44,7 @@ describe('ZoteroExecutor', function () {
     ]);
 
     let promise = executor.submit(new TestCommand())
-      .then((response) => {
+      .then(response => {
         response.should.eql(responseValue)
         return response;
       });

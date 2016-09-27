@@ -56,10 +56,10 @@ describe('ZoteroClient', function () {
     it('should get a listing of available item types', function () {
       let typesP = client.getItemTypes();
       expect(typesP).to.be.ok;
-      return typesP.then((types) => {
+      return typesP.then(types => {
         types.should.be.an('array');
         types.should.not.be.empty;
-        types.every((type) => type.should.be.an.instanceof(ZoteroItemType));
+        types.every(type => type.should.be.an.instanceof(ZoteroItemType));
       });
     });
   });
@@ -70,10 +70,10 @@ describe('ZoteroClient', function () {
     it('should get a listing of all fields', function () {
       let fieldsP = client.getItemFields();
       expect(fieldsP).to.be.ok;
-      return fieldsP.then((fields) => {
+      return fieldsP.then(fields => {
         fields.should.be.an('array');
         fields.should.not.be.empty;
-        fields.every((field) => field.should.be.an.instanceof(ZoteroItemField));
+        fields.every(field => field.should.be.an.instanceof(ZoteroItemField));
       });
     });
 
@@ -85,10 +85,10 @@ describe('ZoteroClient', function () {
       });
       let fieldsP = client.getItemFields(itemType);
       expect(fieldsP).to.be.ok;
-      return fieldsP.then((fields) => {
+      return fieldsP.then(fields => {
         fields.should.be.an('array');
         fields.should.not.be.empty;
-        fields.every((field) => field.should.be.an.instanceof(ZoteroItemField));
+        fields.every(field => field.should.be.an.instanceof(ZoteroItemField));
       });
     });
   });
@@ -99,10 +99,10 @@ describe('ZoteroClient', function () {
     it('should get a listing of all creator fields', function () {
       let fieldsP = client.getCreatorFields();
       expect(fieldsP).to.be.ok;
-      return fieldsP.then((fields) => {
+      return fieldsP.then(fields => {
         fields.should.be.an('array');
         fields.should.not.be.empty;
-        fields.every((field) => field.should.be.an.instanceof(ZoteroItemField));
+        fields.every(field => field.should.be.an.instanceof(ZoteroItemField));
       });
     });
   });
