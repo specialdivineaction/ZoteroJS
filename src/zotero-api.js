@@ -91,3 +91,19 @@
  * @property {string} creatorType
  * @property {string} localized
  */
+
+/**
+ * @typedef ZoteroMultiSaveReportDTO
+ * @type {object}
+ * @property {object.<string, string>} success
+ * @property {object.<string, string>} unchanged
+ * @property {object.<string, ZoteroErrorReportDTO>} failed
+ */
+
+/**
+ * @typedef ZoteroErrorReportDTO
+ * @type {object}
+ * @property {string} key
+ * @property {string} code - HTTP response code
+ * @property {string} message - Error message
+ */

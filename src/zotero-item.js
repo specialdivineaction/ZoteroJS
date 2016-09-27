@@ -83,7 +83,7 @@ class ZoteroItem {
       return Promise.resolve([]);
     }
 
-    let promises = this.collectionIds.map((id) => this.library.getCollection(id));
+    let promises = this.collectionIds.map(id => this.library.getCollection(id));
 
     return Promise.all(promises);
   }

@@ -49,7 +49,7 @@ class GetItemCommand extends LibraryResourceCommand {
    * @return {Promise.<ZoteroItem>}
    */
   handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroItem>*/ {
-    return super.handleResponse(response).then((dto) => new ZoteroItem(this.library, dto));
+    return super.handleResponse(response).then(dto => new ZoteroItem(this.library, dto));
   }
 }
 
