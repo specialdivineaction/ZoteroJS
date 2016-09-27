@@ -26,13 +26,13 @@ describe('ZoteroItem', function () {
       let itemP = library.getItem('DZ7P8B6R');
       expect(itemP).to.be.ok;
 
-      return itemP.then((item) => {
+      return itemP.then(item => {
         let collectionsP = item.getCollections();
         expect(collectionsP).to.be.ok;
 
-        return collectionsP.then((collections) => {
+        return collectionsP.then(collections => {
           collections.should.be.an('array');
-          collections.every((collection) => collection.should.be.an.instanceof(ZoteroCollection));
+          collections.every(collection => collection.should.be.an.instanceof(ZoteroCollection));
         });
       });
     });

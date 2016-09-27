@@ -48,7 +48,7 @@ class GetGroupsCommand extends ResourceCommand {
    * @return {Promise.<ZoteroGroup[]>}
    */
   handleResponse(response/*: Promise<any>*/)/*: Promise<ZoteroGroup[]>*/ {
-    return super.handleResponse(response).then((groups) => groups.map((group) => new ZoteroGroup(group)));
+    return super.handleResponse(response).then(groups => groups.map(group => new ZoteroGroup(group)));
   }
 }
 
