@@ -58,11 +58,21 @@ class ZoteroLibrary {
     this.name = group ? group.name : `User library for ${this.id}`;
   }
 
+  /**
+   * Find all items in the current library matching the given query criteria
+   * @param {string} query
+   * @return {Promise.<ZoteroItem[]>}
+   */
   searchItems(query/*: string*/)/*: Promise<ZoteroItem[]>*/ {
     let command = new LibraryItemSearchCommand(this, query);
     return command.execute();
   }
 
+  /**
+   * Find all items in the current library and all sub-collections that match the given query criteria
+   * @param {string} query
+   * @return {Promise.<ZoteroItem[]>}
+   */
   searchAllItems(query/*: string*/)/*: Promise<ZoteroItem[]>*/ {
     let command = new LibraryItemSearchCommand(this, query, true);
     return command.execute();
@@ -128,7 +138,7 @@ class ZoteroLibrary {
   /**
    * Saves an item to the Zotero API. If the provided item does not already exist (i.e. have a key),
    * then a new item will be created and a new key assigned.
-   * @param {object} item
+   * @param {object} item - item properties; this can come from {@link ZoteroItem#properties} or from {@link ZoteroClient#getTemplate}
    * @return {Promise.<ZoteroItem>} - resolves to the created or updated item on success
    */
   saveItem(item/*: Object*/)/*: Promise<ZoteroItem>*/ {
