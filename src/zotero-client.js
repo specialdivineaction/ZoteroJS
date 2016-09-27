@@ -24,6 +24,14 @@ class ZoteroClient {
   }
 
   /**
+   * Gets the built-in Zotero API base url
+   * @return {string}
+   */
+  static getDefaultBaseUrl()/*: string*/ {
+    return ZoteroExecutor.getDefaultBaseUrl();
+  }
+
+  /**
    * @return {ZoteroAccount} a default account that is not tied to any user and is not authenticated.
    */
   getAnonymousAccount()/*: ZoteroAccount*/ {
